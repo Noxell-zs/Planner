@@ -1,0 +1,36 @@
+name: PlannerBuild
+
+env:
+  main_project_module: app
+  app_name: Planner
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set current date as env variable
+        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+
+      - name: Build APK debug project - ${{ env.main_project_module }} module
+        run: gradle assembleDebug
+
+      - name: Upload APK debug - ${{ env.app_name }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.date_today }} - ${{ env.app_name }} - APK debug generated
+          path: ${{ env.main_project_module }}/build/outputs/apk/debug/
