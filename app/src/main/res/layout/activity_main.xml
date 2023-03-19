@@ -135,7 +135,8 @@
                         app:layout_constraintBaseline_toBaselineOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         android:clickable="true"
-                        android:onClick="toEditEvent"/>
+                        android:onClick="toEditEvent"
+                        android:padding="2dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -220,7 +221,8 @@
                         app:layout_constraintBaseline_toBaselineOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         android:clickable="true"
-                        android:onClick="toEditEvent"/>
+                        android:onClick="toEditEvent"
+                        android:padding="2dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
