@@ -45,186 +45,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent">
             <LinearLayout
+                android:id="@+id/events_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="72dp"
                 app:layout_constraintTop_toBottomOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/task_card_old"
-                    android:elevation="2dp"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:id="@+id/name1"
-                        android:textColor="@color/dark_purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:text="Событие 1"
-                        android:textSize="25sp" />
-
-                    <ImageView
-                        android:id="@+id/calender1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/calendar"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:id="@+id/date1"
-                        android:textColor="@color/purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name1"
-                        app:layout_constraintLeft_toRightOf="@+id/calender1"
-                        android:text="12.04.1987"
-                        android:textSize="15sp"
-                        android:paddingRight="5dp" />
-
-                    <ImageView
-                        android:id="@+id/sun"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/sun"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/date1"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:id="@+id/weather1"
-                        android:textColor="@color/purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name1"
-                        app:layout_constraintLeft_toRightOf="@+id/sun"
-                        android:text="+30"
-                        android:textSize="15sp"
-                        android:paddingRight="5dp"/>
-
-                    <ImageView
-                        android:id="@+id/geo1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/geo_marker"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/weather1"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:textColor="@color/purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name1"
-                        app:layout_constraintLeft_toRightOf="@+id/geo1"
-                        android:text="улица Ленина, 118"
-                        android:textSize="15sp" />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/pencil"
-                        app:layout_constraintBaseline_toBaselineOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:clickable="true"
-                        android:onClick="toEditEvent"
-                        android:padding="2dp"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/task_card_new"
-                    android:elevation="2dp"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:id="@+id/name2"
-                        android:textColor="@color/dark_purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:text="Событие 2"
-                        android:textSize="25sp" />
-
-                    <ImageView
-                        android:id="@+id/calender2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/calendar"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:id="@+id/date2"
-                        android:textColor="@color/purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name2"
-                        app:layout_constraintLeft_toRightOf="@+id/calender2"
-                        android:text="12.04.2025"
-                        android:textSize="15sp"
-                        android:paddingRight="5dp"/>
-
-                    <ImageView
-                        android:id="@+id/cloud"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/cloud_snow"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/date2"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:id="@+id/weather2"
-                        android:textColor="@color/purple"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name2"
-                        app:layout_constraintLeft_toRightOf="@+id/cloud"
-                        android:text="-30"
-                        android:textSize="15sp"
-                        android:paddingRight="5dp"/>
-
-                    <ImageView
-                        android:id="@+id/geo2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/geo_marker"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/weather2"
-                        app:layout_constraintHeight="15sp"
-                        app:layout_constraintWidth="15sp"
-                        android:layout_margin="2dp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/purple"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/name2"
-                        app:layout_constraintLeft_toRightOf="@+id/geo2"
-                        android:text="улица Ленина, 119"
-                        android:textSize="15sp" />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/pencil"
-                        app:layout_constraintBaseline_toBaselineOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:clickable="true"
-                        android:onClick="toEditEvent"
-                        android:padding="2dp"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
         </ScrollView>
 
@@ -238,7 +64,8 @@
             app:layout_constraintRight_toRightOf="parent"
             android:src="@drawable/plus"
             app:backgroundTint="@color/green"
-            android:onClick="toNewEvent"/>
+            android:onClick="toNewEvent"
+            android:contentDescription="New event" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
