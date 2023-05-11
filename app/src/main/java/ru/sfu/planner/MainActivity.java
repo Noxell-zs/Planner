@@ -9,15 +9,15 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         eventsLayout = findViewById(R.id.events_layout);
         databaseHelper = new DatabaseHelper(getApplicationContext());
         updateList();
+
+//        new Thread(() -> {
+//            try {
+//                String aaa = ServiceAPI.download("https://api.open-meteo.com/v1/forecast?timezone=GMT&daily=temperature_2m_max&latitude=56.01&longitude=92.86");
+//                ServiceAPI.parseJSON(aaa).temperature_2m_max.forEach(System.out::println);
+//                ServiceAPI.parseJSON(aaa).time.forEach(System.out::println);
+//            } catch (IOException ex){
+//                System.err.println(ex.getMessage());
+//            }
+//        }).start();
     }
 
     private void updateList() {
@@ -112,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageView pencil = new ImageView(this);
+        pencil.setId(View.generateViewId());
         ConstraintLayout.LayoutParams pencilParams = new ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
@@ -177,47 +188,13 @@ public class MainActivity extends AppCompatActivity {
         constraintLayout.addView(date);
 
 
-        ImageView weather = new ImageView(this);
-        weather.setId(View.generateViewId());
-        ConstraintLayout.LayoutParams weatherParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        weatherParams.leftToRight = date.getId();
-        weatherParams.topToBottom = title.getId();
-        weatherParams.height = ICON_SIZE;
-        weatherParams.width = ICON_SIZE;
-        weatherParams.setMargins(ICON_M_E, ICON_M_E, ICON_M_E, ICON_M_E);
-        weather.setImageDrawable(
-                ContextCompat.getDrawable(this, R.drawable.sun)
-        );
-        weather.setLayoutParams(weatherParams);
-        constraintLayout.addView(weather);
-
-
-        TextView temperature = new TextView(this);
-        temperature.setId(View.generateViewId());
-        temperature.setTextColor(
-                ContextCompat.getColor(this,  R.color.purple)
-        );
-        temperature.setText(" ");
-        temperature.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
-        ConstraintLayout.LayoutParams temperatureParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        temperatureParams.leftToRight = weather.getId();
-        temperatureParams.topToBottom = title.getId();
-        temperature.setPadding(TEXT_P_LEFT,0, TEXT_P_RIGHT, 0);
-        temperature.setLayoutParams(temperatureParams);
-        constraintLayout.addView(temperature);
-
-
         ImageView geo = new ImageView(this);
         geo.setId(View.generateViewId());
         ConstraintLayout.LayoutParams geoParams = new ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        geoParams.leftToRight = temperature.getId();
-        geoParams.topToBottom = title.getId();
+        geoParams.leftToLeft = constraintLayout.getId();
+        geoParams.topToBottom = date.getId();
         geoParams.height = ICON_SIZE;
         geoParams.width = ICON_SIZE;
         geoParams.setMargins(ICON_M_E, ICON_M_E, ICON_M_E, ICON_M_E);
@@ -232,13 +209,15 @@ public class MainActivity extends AppCompatActivity {
         address.setTextColor(
                 ContextCompat.getColor(this,  R.color.purple)
         );
+        address.setEllipsize(TextUtils.TruncateAt.END);
+        address.setSingleLine(true);
         address.setText(event.address);
         address.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         ConstraintLayout.LayoutParams addressParams = new ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
         addressParams.leftToRight = geo.getId();
-        addressParams.topToBottom = title.getId();
+        addressParams.topToBottom = date.getId();
         address.setPadding(TEXT_P_LEFT,0, TEXT_P_RIGHT,0);
         address.setLayoutParams(addressParams);
         constraintLayout.addView(address);

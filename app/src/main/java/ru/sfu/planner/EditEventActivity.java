@@ -1,5 +1,6 @@
 package ru.sfu.planner;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,9 +8,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import org.osmdroid.util.GeoPoint;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EditEventActivity extends AppCompatActivity {
@@ -40,10 +47,10 @@ public class EditEventActivity extends AppCompatActivity {
             this.finish();
         }
 
-        editTitle = (EditText)findViewById(R.id.editTitle);
-        editDate = (EditText)findViewById(R.id.editDate);
-        editAddress = (EditText)findViewById(R.id.editAddress);
-        editDescription = (EditText)findViewById(R.id.editDescription);
+        editTitle = findViewById(R.id.editTitle);
+        editDate = findViewById(R.id.editDate);
+        editAddress = findViewById(R.id.editAddress);
+        editDescription = findViewById(R.id.editDescription);
 
         editTitle.setText(eventModel.title);
         editDate.setText(eventModel.date);
@@ -84,9 +91,21 @@ public class EditEventActivity extends AppCompatActivity {
         this.finish();
     }
 
+    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                Intent intent;
+                if(result.getResultCode() == Activity.RESULT_OK && (intent = result.getData()) != null){
+                    String accessMessage = intent.getStringExtra("location");
+                    GeoPoint geoPoint = GeoPoint.fromDoubleString(accessMessage, ',');
+                    ServiceAPI.setAddress(geoPoint, editAddress);
+                    System.out.println(geoPoint.getLatitude());
+                }
+            });
+
     public void toMap(View view) {
         Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
+        mStartForResult.launch(intent);
     }
 
 
